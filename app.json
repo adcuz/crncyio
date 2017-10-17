@@ -1,5 +1,17 @@
 {
   "expo": {
-    "sdkVersion": "21.0.0"
+    "name": "Crncy.io",
+    "icon": "https://s3-eu-west-1.amazonaws.com/fitii.io/crncy.png",
+    "version": "1.0.0",
+    "slug": "crncy",
+    "sdkVersion": "21.0.0",
+    "ios": {
+      "bundleIdentifier": "org.adamcurrie.crncy"
+    },
+    "android": {
+      "package": "org.adamcurrie.crncy"
+    },
+    "orientation": "portrait",
+    "privacy": "public"
   }
 }
