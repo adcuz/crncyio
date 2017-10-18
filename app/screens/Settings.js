@@ -19,6 +19,10 @@ class Settings extends React.Component {
     this.props.navigation.navigate('Themes');
   };
 
+  handleDemoAnimationPress = () => {
+    this.props.navigation.navigate('AnimationDemo');
+  };
+
   handleLinkPress = () => {
     Linking.openURL('http8s://www.mypthub.net').catch(() => {
       this.props.alertWithType('error', 'Something went wrong', 'Could not load the link :(');
@@ -34,6 +38,14 @@ class Settings extends React.Component {
           onPress={this.handleThemesPress}
           customIcon={
             <Ionicons name={`${ICON_PREFIX}-arrow-forward`} color={ICON_COLOR} size={ICON_SIZE} />
+          }
+        />
+        <Separator />
+        <ListItem
+          text="Demo Animation"
+          onPress={this.handleDemoAnimationPress}
+          customIcon={
+            <Ionicons name={`${ICON_PREFIX}-recording`} color={ICON_COLOR} size={ICON_SIZE} />
           }
         />
         <Separator />

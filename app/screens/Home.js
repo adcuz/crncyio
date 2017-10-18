@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Expo from 'expo';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
@@ -25,8 +26,22 @@ class Home extends React.Component {
     alertWithType: PropTypes.func,
   };
 
+  constructor(props) {
+    super(props);
+    this.soundObject = new Expo.Audio.Sound();
+  }
+
   componentWillMount() {
     this.props.dispatch(getInitialConversion());
+  }
+
+  componentDidMount() {
+    try {
+      this.soundObject.loadAsync(require('../assets/audio/swap.mp3'));
+      // Your sound is playing!
+    } catch (error) {
+      // An error occurred!
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,6 +70,13 @@ class Home extends React.Component {
 
   handlePressSwapCurrencies = () => {
     this.props.dispatch(swapCurrencies());
+    try {
+      this.soundObject.playAsync().then(() => {
+        this.soundObject.setPositionAsync(0);
+      });
+    } catch (e) {
+      console.log('playerror', e);
+    }
   };
 
   handleOptionsPress = () => {

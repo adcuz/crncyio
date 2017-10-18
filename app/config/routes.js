@@ -4,6 +4,7 @@ import Home from '../screens/Home';
 import CurrencyList from '../screens/CurrencyList';
 import Settings from '../screens/Settings';
 import Themes from '../screens/Themes';
+import AnimationDemo from '../screens/AnimationDemo';
 
 const HomeStack = StackNavigator(
   {
@@ -23,6 +24,12 @@ const HomeStack = StackNavigator(
       screen: Themes,
       navigationOptions: {
         headerTitle: 'Themes',
+      },
+    },
+    AnimationDemo: {
+      screen: AnimationDemo,
+      navigationOptions: {
+        header: null,
       },
     },
   },
