@@ -1,10 +1,15 @@
 import React from 'react';
 import { View, Text, Keyboard, Animated, Platform } from 'react-native';
+import PropTypes from 'prop-types';
 import styles from './styles';
 
 const KEYBOARD_ANIMATION_DURATION = 100;
 
 class Logo extends React.Component {
+  static propTypes = {
+    tintColor: PropTypes.string,
+  };
+
   constructor(props) {
     super(props);
 
