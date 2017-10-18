@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Expo from 'expo';
+import { Audio } from 'expo';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
@@ -24,11 +24,12 @@ class Home extends React.Component {
     conversionDate: PropTypes.object,
     primaryColor: PropTypes.string,
     alertWithType: PropTypes.func,
+    currencyError: PropTypes.string,
   };
 
   constructor(props) {
     super(props);
-    this.soundObject = new Expo.Audio.Sound();
+    this.soundObject = new Audio.Sound();
   }
 
   componentWillMount() {
@@ -38,6 +39,11 @@ class Home extends React.Component {
   componentDidMount() {
     try {
       this.soundObject.loadAsync(require('../assets/audio/swap.mp3'));
+      Audio.setAudioModeAsync({
+        playsInSilentModeIOS: false,
+        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_MIX_WITH_OTHERS,
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+      });
       // Your sound is playing!
     } catch (error) {
       // An error occurred!
@@ -75,7 +81,7 @@ class Home extends React.Component {
         this.soundObject.setPositionAsync(0);
       });
     } catch (e) {
-      console.log('playerror', e);
+      // Todo: something?
     }
   };
 
