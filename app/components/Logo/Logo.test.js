@@ -2,22 +2,36 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Logo from './Logo';
 
+const minProps = {
+  tintColor: '#123456',
+};
+
 describe('rendering <Logo />', () => {
-  const wrapper = shallow(<Logo />);
-  console.log(wrapper.debug());
+  const wrapper = shallow(<Logo {...minProps} />);
+
   it('should render a <View />', () => {
     expect(wrapper.find('View')).toHaveLength(1);
   });
 
   it('should render the background', () => {
-    expect(wrapper.find('AnimatedComponent')).toHaveLength(1);
+    const children = wrapper.children('AnimatedComponent');
+    expect(children).toHaveLength(1);
   });
 
-  it('should render the logo');
+  it('should render the logo', () => {
+    const children = wrapper.children('AnimatedComponent');
+    expect(children.childAt(0)).toHaveLength(1);
+  });
 
-  it('should render the logo color');
+  it('should render the logo color', () => {
+    const logoWrapper = shallow(<Logo {...minProps} tintColor="#909090" />)
+      .children('AnimatedComponent')
+      .childAt(0);
 
-  it('should render the logo color change');
+    const styleWithTintColor = logoWrapper
+      .prop('style')
+      .find(obj => typeof obj === 'object' && obj.hasOwnProperty('tintColor'));
 
-  it('should get smaller when the keyboard opens');
+    expect(styleWithTintColor).toHaveProperty('tintColor', '#909090');
+  });
 });
